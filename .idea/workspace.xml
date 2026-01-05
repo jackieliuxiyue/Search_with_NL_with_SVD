@@ -4,42 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18635859-bcb3-42d6-8576-8b4d7de13bd1" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Search_with_NL_with_SVD.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/chroma_api_bge_local.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/describe_csv_heuristic.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/1_Pooling/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/config_sentence_transformers.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/modules.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/pytorch_model.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/sentence_bert_config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/special_tokens_map.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/tokenizer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/tokenizer_config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-base-zh-v1.5/vocab.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/1_Pooling/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/config_sentence_transformers.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/model.safetensors" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/modules.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/pytorch_model.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/sentence_bert_config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/special_tokens_map.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/tokenizer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/tokenizer_config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hf_models/bge-small-zh-v1.5/vocab.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ragkit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
+    <list default="true" id="18635859-bcb3-42d6-8576-8b4d7de13bd1" name="更改" comment="data analysis assistance, main function finished">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "jackieliuxiyue"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/jackieliuxiyue/Search_with_NL_with_SVD",
+    "accountId": "30488063-23d9-45e4-9c18-f72f603b5926"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -105,15 +85,28 @@
       <option name="presentableId" value="Default" />
       <updated>1767518014197</updated>
       <workItem from="1767518015227" duration="1713000" />
-      <workItem from="1767574438186" duration="13272000" />
+      <workItem from="1767574438186" duration="18384000" />
     </task>
+    <task id="LOCAL-00001" summary="data analysis assistance, main function finished">
+      <option name="closed" value="true" />
+      <created>1767592747389</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1767592747389</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="data analysis assistance, main function finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="data analysis assistance, main function finished" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Search_with_NL_with_SVD$utils.coverage" NAME="utils 覆盖结果" MODIFIED="1767579088141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/Search_with_NL_with_SVD$main.coverage" NAME="main 覆盖结果" MODIFIED="1767589993027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Search_with_NL_with_SVD$utils.coverage" NAME="utils 覆盖结果" MODIFIED="1767595988173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Search_with_NL_with_SVD$main.coverage" NAME="main 覆盖结果" MODIFIED="1767596700208" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

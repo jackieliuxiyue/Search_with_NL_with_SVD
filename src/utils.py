@@ -1,7 +1,7 @@
 import pandas as pd
 
-input_csv = "data/中台模型_资产导出.csv"
-output_csv = "data/中台模型_资产导出_台账.csv"
+input_csv = "data/中台模型数据项.csv"
+output_csv = "data/中台模型数据项_台账.csv"
 
 df = pd.read_csv(input_csv, encoding="utf-8-sig")
 

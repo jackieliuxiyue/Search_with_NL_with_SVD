@@ -1,7 +1,7 @@
 from chroma_api_bge_local import ChromaDB, get_chroma_with_local_bge, AddResult
 import os
 import pandas as pd
-from typing import Optional, Dict, Any, List, Tuple, Set, Iterable, Callable
+from typing import Optional, Dict, Any, List, Tuple, Set, Iterable, Callable, Union, Sequence
 import re
 from ragkit import RAGEngine, OpenAICompatibleChat
 
@@ -146,22 +146,61 @@ def df_to_labeled_text(df, cell_sep="；", kv_sep="：", row_sep="\n"):
 
     return row_sep.join(lines)
 
-def search_in_table(path: str, target: str, encoding: str = "utf-8") -> str:
-    table = pd.read_csv(path, encoding = "utf-8-sig")
-    col = "所属表/视图中文名"
+def search_in_table(
+    path: str,
+    target: Union[Sequence[str], Tuple[str, str]],
+    encoding: str = "utf-8",
+) -> str:
+    table = pd.read_csv(path, encoding="utf-8-sig")
 
-    matched = table.loc[table[col] == target]
+    asset_col = "资产中文名称"
+    view_col = "所属表/视图中文名"
+
+    if not isinstance(target, (list, tuple)) or len(target) != 2:
+        raise ValueError("target 必须是长度为2的 [资产中文名称, 所属表/视图中文名]")
+
+    asset_name, view_name = target[0], target[1]
+
+    matched = table.loc[
+        (table[asset_col].astype(str).str.strip() == str(asset_name).strip())
+        & (table[view_col].astype(str).str.strip() == str(view_name).strip())
+    ]
+
     text = df_to_labeled_text(matched, row_sep="\n")
     print(text)
-
     return text
+
+def search_in_table_certain_row(
+    path: str,
+    target: str,
+    encoding: str = "utf-8",
+    cols_keep: Optional[List[str]] = None
+) -> str:
+    table = pd.read_csv(path, encoding="utf-8-sig")
+    key_col = "所属表/视图中文名"
+
+    matched = table.loc[table[key_col] == target]
+
+    if cols_keep is not None:
+        cols_keep = [c for c in cols_keep if c in matched.columns]
+        matched = matched.loc[:, cols_keep]
+
+    text = df_to_labeled_text(matched, row_sep="\n")
+    print(text)
+    return text
+
+def line_to_tuple(line: str) -> Tuple[str, str]:
+    m = re.fullmatch(r"\[\s*([^,\]]+?)\s*,\s*([^\]]+?)\s*\]", line.strip())
+    if not m:
+        raise ValueError(f"格式不符合: {line!r}，期望形如 [资产中文名, 所属表/视图中文名]")
+    return (m.group(1).strip(), m.group(2).strip())
 
 def main():
     data_dir = "./data"
 
     csv_path = "./data/中台模型_资产导出_台账.csv"
     txt_path = "./data/中台模型_资产导出_台账.txt"
-    csv_path_check = "./data/中台模型数据项.csv"
+    csv_path_check = "./data/中台模型数据项_台账.csv"
 
     seen_txt = "./data/seen_csv_index.txt"
 
@@ -212,9 +251,11 @@ def main():
         all_rows = []
         total = 0
 
+        need_cols = ["资产中文名称", "资产定义说明", "所属表/视图中文名"]
+
         for i, block in enumerate(blocks):
             try:
-                req = search_in_table(csv_path_check, block, encoding="utf-8")
+                req = search_in_table_certain_row(csv_path_check, block, cols_keep=need_cols)
             except Exception as e:
                 print(e)
                 continue
@@ -231,12 +272,48 @@ def main():
         rows_text = (
                 merged
                 + "\n"
-                + "以上是知识库检索出的相关的行，请根据这些知识，帮助一个数据分析员，"
-                  "他想要分析一个具体的问题，你需要帮助他找到他所需要的数据资产，或者生成相应的分析方法"
+                + "以上是知识库检索出的相关的数据资产，请根据数据分析员想要分析的具体的问题。要求：只返回你认为有用的[资产中文名,所属表/视图中文名]，不要有其他，每一条用‘\n’分隔"
+                + "他最初的问题是："
+                + q
         )
 
-        res_2 = rag.ask_without_search(q, prompt=rows_text)
+        q_2 = input("\n以上是检索出的相关结果，请问您要做的分析具体涉及哪几个方面，或针对什么具体问题？> ").strip()
+
+        res_2 = rag.ask_without_search(q_2, prompt=rows_text)
         print(res_2.answer)
+
+        blocks_2 = [b.strip() for b in res_2.answer.split("\n") if b.strip()]
+
+        all_rows_2 = []
+        total = 0
+
+        for i, block in enumerate(blocks_2):
+            try:
+                t = line_to_tuple(block)
+                req = search_in_table(csv_path_check, t)
+            except Exception as e:
+                print(e)
+                continue
+
+            all_rows_2.append(req)
+            total += len(req)
+
+        if not all_rows_2:
+            continue
+
+        merged_2 = "\n".join(all_rows_2)
+        print(merged_2)
+
+        rows_text_2 = (
+                merged_2
+                + "\n"
+                + "以上是知识库检索出的相关的数据资产，请根据数据分析员想要分析的具体的问题，帮助他进行分析"
+                + "他最初的问题是："
+                + q
+        )
+
+        res_3 = rag.ask_without_search(q_2, prompt=rows_text_2)
+        print(res_3.answer)
 
 if __name__ == "__main__":
     main()
