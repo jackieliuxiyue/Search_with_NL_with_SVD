@@ -246,6 +246,7 @@ def main():
         res = rag.ask(q, prompt=prompt_1, top_k=10, max_distance=0.45)
         print("\n数据分析助手>")
         print(res.answer)
+        print("---------------------------------------------------------------------------------")
 
         blocks = [b.strip() for b in res.answer.split("\n") if b.strip()]
 
@@ -257,86 +258,60 @@ def main():
         for i, block in enumerate(blocks):
             try:
                 req = search_in_table_certain_row(csv_path_check, block, cols_keep=need_cols)
+                prompt_each = (
+                    req
+                    + "\n"
+                    + "以上是知识库检索出的相关的数据资产，请根据数据分析员想要分析的具体的问题。要求：只返回你认为有用的资产。要求：返回格式为[资产中文名,所属表/视图中文名]，不要展示列名，不要有其他，每一条用‘\n’分隔"
+                )
+
+                res_2 = rag.ask_without_search(q, prompt=prompt_each)
+                print(res_2.answer)
+                print("---------------------------------------------------------------------------------")
+
+                blocks_2 = [b.strip() for b in res_2.answer.split("\n") if b.strip()]
+
+                all_rows_2 = []
+                total = 0
+
+                for j, block_2 in enumerate(blocks_2):
+                    try:
+                        k = line_to_tuple(block_2)
+                        req_2 = search_in_table(csv_path_check, k)
+                    except Exception as e:
+                        print(e)
+                        continue
+
+                    all_rows_2.append(req_2)
+                    total += len(req_2)
+
+                merged = "\n".join(all_rows_2)
+                all_rows.append(merged)
+                total += len(req)
+                print("---------------------------------------------------------------------------------")
+
             except Exception as e:
                 print(e)
                 continue
 
-            all_rows.append(req)
-            total += len(req)
-
         if not all_rows:
             continue
 
-        merged = "\n".join(all_rows)
-        print(merged)
+        print("---------------------------------------------------------------------------------")
+        merged_2 = "\n".join(all_rows)
+        print(merged_2)
+        print("---------------------------------------------------------------------------------")
 
         rows_text = (
-                merged
+                merged_2
                 + "\n"
-                + "以上是知识库检索出的相关的数据资产，请根据数据分析员想要分析的具体的问题。要求：只返回你认为有用的[资产中文名,所属表/视图中文名]，不要展示列名，不要有其他，每一条用‘\n’分隔"
+                + "以上是知识库检索出的相关的数据资产，请根据数据分析员想要分析的具体的问题。"
                 + "他最初的问题是："
                 + q
         )
 
-        final_answer = ""
-
-        while True:
-
-            q_2 = input("\n以上是检索出的相关结果，请问您要做的分析具体涉及哪几个方面，或针对什么具体问题？> ").strip()
-            if not q_2 or q_2.lower() in ("competent", "ok"):
-                break
-            res_2 = rag.ask_without_search(q_2, prompt=rows_text)
-            print(res_2.answer)
-
-            blocks_2 = [b.strip() for b in res_2.answer.split("\n") if b.strip()]
-
-            all_rows_2 = []
-            total = 0
-
-            for i, block in enumerate(blocks_2):
-                try:
-                    t = line_to_tuple(block)
-                    req = search_in_table(csv_path_check, t)
-                except Exception as e:
-                    print(e)
-                    continue
-
-                all_rows_2.append(req)
-                total += len(req)
-
-            if not all_rows_2:
-                print("No lines to search.")
-                continue
-
-            merged_2 = "\n".join(all_rows_2)
-            print(merged_2)
-            final_answer = merged_2
-
-            rows_text_2 = (
-                final_answer
-                + "\n"
-                + "以上是知识库检索出的相关的数据资产，请根据数据分析员想要分析的具体的问题，帮助他进行分析。注意，在描述数据资产时，请同时描述其所属表/视图中文名"
-                + "他最初的问题是："
-                + q
-            )
-
-            res_3 = rag.ask_without_search(q_2, prompt=rows_text_2)
-            print(res_3.answer)
-
-        print(final_answer)
-
+        res_3 = rag.ask_without_search(q, prompt=rows_text)
+        print(res_3.answer)
+        print("---------------------------------------------------------------------------------")
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
 
