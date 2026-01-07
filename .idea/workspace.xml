@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18635859-bcb3-42d6-8576-8b4d7de13bd1" name="更改" comment="data analysis assistance, main function finished">
-      <change afterPath="$PROJECT_DIR$/src/mian_2.py" afterDir="false" />
+    <list default="true" id="18635859-bcb3-42d6-8576-8b4d7de13bd1" name="更改" comment="second version of main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mian_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mian_2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +46,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.mian_2.executor": "Run",
-    "Python.utils.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Lenovo/PycharmProjects/Search_with_NL_with_SVD/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mian_2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/PycharmProjects/Search_with_NL_with_SVD/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\PycharmProjects\Search_with_NL_with_SVD\src" />
@@ -89,7 +88,8 @@
       <workItem from="1767574438186" duration="19106000" />
       <workItem from="1767660396764" duration="903000" />
       <workItem from="1767661318952" duration="606000" />
-      <workItem from="1767661944454" duration="7619000" />
+      <workItem from="1767661944454" duration="10601000" />
+      <workItem from="1767692344035" duration="20000" />
     </task>
     <task id="LOCAL-00001" summary="data analysis assistance, main function finished">
       <option name="closed" value="true" />
@@ -107,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767597536184</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="second version of main">
+      <option name="closed" value="true" />
+      <created>1767683687259</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1767683687259</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,7 +123,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="data analysis assistance, main function finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="data analysis assistance, main function finished" />
+    <MESSAGE value="second version of main" />
+    <option name="LAST_COMMIT_MESSAGE" value="second version of main" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Search_with_NL_with_SVD$utils.coverage" NAME="utils 覆盖结果" MODIFIED="1767595988173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />

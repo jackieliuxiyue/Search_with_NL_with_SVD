@@ -251,7 +251,7 @@ def main():
         blocks = [b.strip() for b in res.answer.split("\n") if b.strip()]
 
         all_rows = []
-        total = 0
+        total_2 = 0
 
         need_cols = ["资产中文名称", "资产定义说明", "所属表/视图中文名"]
 
@@ -286,7 +286,7 @@ def main():
 
                 merged = "\n".join(all_rows_2)
                 all_rows.append(merged)
-                total += len(req)
+                total_2 += len(req)
                 print("---------------------------------------------------------------------------------")
 
             except Exception as e:
@@ -312,6 +312,7 @@ def main():
         res_3 = rag.ask_without_search(q, prompt=rows_text)
         print(res_3.answer)
         print("---------------------------------------------------------------------------------")
+
 if __name__ == "__main__":
     main()
 
