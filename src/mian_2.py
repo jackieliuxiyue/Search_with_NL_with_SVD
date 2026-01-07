@@ -198,15 +198,21 @@ def line_to_tuple(line: str) -> Tuple[str, str]:
 def main():
     global final_answer
     data_dir = "./data"
+    kn_dir = "./kn"
 
     csv_path = "./data/中台模型_资产导出_台账.csv"
     txt_path = "./data/中台模型_资产导出_台账.txt"
     csv_path_check = "./data/中台模型数据项_台账.csv"
 
     seen_txt = "./data/seen_csv_index.txt"
+    seen_doc = "./know/seen_kn_index.txt"
+    doc_path = "./know/kn.txt"
 
     key = _seen_key_relpath(csv_path, base_dir=data_dir)
     seen = _read_seen(seen_txt)
+
+    key_2 = _seen_key_relpath(doc_path, base_dir=kn_dir)
+    seen_2 = _read_seen(seen_doc)
 
     db = get_chroma_with_local_bge(
         model_path="./hf_models/bge-base-zh-v1.5",
@@ -214,6 +220,19 @@ def main():
         collection_name="documents",
         device="cpu",
     )
+
+    db_2 = get_chroma_with_local_bge(
+        model_path="./hf_models/bge-base-zh-v1.5",
+        persist_dir="./chroma_db_2",
+        collection_name="documents",
+        device="cpu",
+    )
+
+    if key_2 in seen_2:
+        print(f"Skip (seen): {key_2}")
+    else:
+        db_2.add_file(doc_path)
+        _append_seen(seen_doc, [key_2])
 
     if key in seen:
         print(f"Skip (seen): {key}")
@@ -233,6 +252,11 @@ def main():
     else:
         print("No lines to index.")
 
+    llm_kn = OpenAICompatibleChat()
+    rag_kn = RAGEngine(db=db_2, llm_chat=llm_kn, prompt="你是数据字典助手。只能依据上下文回答。")
+
+    prompt_0 = "请根据知识库中检索出的条目，翻译、修改、丰富客户问的问题，让其意图更明确、更易懂，要求：使用中文，只返回修改后的问题"
+
     llm = OpenAICompatibleChat()
     rag = RAGEngine(db=db, llm_chat=llm, prompt="你是数据字典助手。只能依据上下文回答。")
 
@@ -243,7 +267,12 @@ def main():
         if not q or q.lower() in ("exit", "quit", "q"):
             break
 
-        res = rag.ask(q, prompt=prompt_1, top_k=10, max_distance=0.45)
+        res_0 = rag_kn.ask(q, prompt=prompt_0, top_k=3, max_distance=0.3)
+        print(res_0.answer)
+        q = res_0.answer
+        print("---------------------------------------------------------------------------------")
+
+        res = rag.ask(q, prompt=prompt_1, top_k=10, max_distance=0.7)
         print("\n数据分析助手>")
         print(res.answer)
         print("---------------------------------------------------------------------------------")

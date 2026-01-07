@@ -98,19 +98,17 @@ class ChromaDB:
         }
 
     def add_text(
-        self,
-        text: str,
-        *,
-        source: str = "manual",
-        doc_id: Optional[str] = None,
-        chunk_size: int = 800,
-        chunk_overlap: int = 120,
-        extra_metadata: Optional[Dict[str, Any]] = None,
+            self,
+            text: str,
+            *,
+            source: str = "manual",
+            doc_id: Optional[str] = None,
+            extra_metadata: Optional[Dict[str, Any]] = None,
     ) -> AddResult:
         if doc_id is None:
             doc_id = str(uuid.uuid4())
 
-        chunks = chunk_text(text, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+        chunks = [line.strip() for line in text.split("\n") if line.strip()]
         if not chunks:
             return AddResult(doc_id=doc_id, chunk_ids=[], chunks_added=0)
 
@@ -132,8 +130,6 @@ class ChromaDB:
         encoding: str = "utf-8",
         source: Optional[str] = None,
         doc_id: Optional[str] = None,
-        chunk_size: int = 800,
-        chunk_overlap: int = 120,
         extra_metadata: Optional[Dict[str, Any]] = None,
     ) -> AddResult:
         with open(file_path, "r", encoding=encoding) as f:
@@ -142,8 +138,6 @@ class ChromaDB:
             text,
             source=source or file_path,
             doc_id=doc_id,
-            chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap,
             extra_metadata=extra_metadata,
         )
 
